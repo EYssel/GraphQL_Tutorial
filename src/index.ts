@@ -2,26 +2,37 @@ import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
-import { UserMutationResolvers } from "./user/users.mutations.resolvers";
-import { UserQueriesResolvers } from "./user/users.queries.resolvers";
+import { UserResolvers } from "./user/user.resolvers";
 
 async function main() {
     const schema = await buildSchema({
-        resolvers: [UserMutationResolvers, UserQueriesResolvers],
+        resolvers: [UserResolvers],
         emitSchemaFile: true,
-    })
-    const app = express()
+        // validate: (argValue, argType) => {
+        //     // call joiful validate
+        //     console.log(JSON.stringify(argValue))
+        //     console.log(JSON.stringify(argType))
+        //     // if (error) {
+        //     //     console.log(error)
+        //     //     // throw error on failed validation
+        //     //     throw error;
+        //     // }
+        // },
+    });
+    const app = express();
 
     app.use(
         "/graphql",
         graphqlHTTP({
             schema: schema,
         })
-    )
+    );
 
-    app.listen(8000)
+    app.listen(8080);
 
-    console.log("Running a GraphQL API server at http://localhost:8000/graphql")
+    console.log(
+        "Running a GraphQL API server at http://localhost:8000/graphql"
+    );
 }
 
 main();

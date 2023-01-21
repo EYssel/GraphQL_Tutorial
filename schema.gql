@@ -5,17 +5,17 @@
 
 type Mutation {
   createUser(input: UserInput!): User!
-  updateUser(id: Float!, input: UserInput!): User!
+  updateUser(id: Int!, input: UserInput!): User!
 }
 
 type Query {
-  getUser(id: Float!): User!
+  getUser(id: Int!): User!
   getUsers: [User!]!
 }
 
 type User {
   email: String!
-  id: Float!
+  id: ID!
   name: String!
 }
 

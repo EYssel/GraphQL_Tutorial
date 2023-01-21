@@ -1,8 +1,8 @@
-import { Arg, Mutation, Resolver } from "type-graphql"
-import { User, UserInput } from "./users.schema"
+import { Arg, Int, Mutation, Query, Resolver } from "type-graphql"
+import { User, UserInput } from "./user.schema"
 
-@Resolver(() => User)
-export class UserMutationResolvers {
+@Resolver()
+export class UserResolvers {
   private users: User[] = [
     { id: 1, name: "John Doe", email: "johndoe@gmail.com" },
     { id: 2, name: "Jane Doe", email: "janedoe@gmail.com" },
@@ -10,10 +10,10 @@ export class UserMutationResolvers {
   ]
 
   @Mutation(() => User)
-  async createUser(@Arg("input") input: UserInput): Promise<User> {
+  async createUser(@Arg('input', {validate: {enableDebugMessages: true}}) input: UserInput): Promise<User> {
     const user = {
       id: this.users.length + 1,
-      ...input,
+      ...input
     }
     this.users.push(user)
     return user
@@ -21,7 +21,7 @@ export class UserMutationResolvers {
 
   @Mutation(() => User)
   async updateUser(
-    @Arg("id") id: number,
+    @Arg("id", () => Int) id: number,
     @Arg("input") input: UserInput
   ): Promise<User> {
     const user = this.users.find((u) => u.id === id)
@@ -34,5 +34,16 @@ export class UserMutationResolvers {
     }
     this.users = this.users.map((u) => (u.id === id ? updatedUser : u))
     return updatedUser
+  }
+
+  @Query(() => [User])
+  async getUsers(): Promise<User[]> {
+    return this.users
+  }
+
+  @Query(() => User)
+  async getUser(@Arg("id", () => Int) id: number): Promise<User | undefined> {
+    const user = this.users.find((u) => u.id === id)
+    return user
   }
 }
