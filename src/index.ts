@@ -35,6 +35,8 @@ async function main() {
     console.log(
         `Running a GraphQL API server at http://localhost:${PORT}/graphql`
     );
+
+    console.log(`Test`);
 }
 
 main();
