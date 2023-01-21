@@ -1,0 +1,5 @@
+name: 'Graphql Tutorial'
+description: 'Tutorial'
+runs: 
+    using: 'docker'
+    image: 'Dockerfile'
