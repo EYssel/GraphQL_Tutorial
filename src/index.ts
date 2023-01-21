@@ -28,10 +28,12 @@ async function main() {
         })
     );
 
-    app.listen(8080);
+    const PORT = 8080;
+
+    app.listen(PORT);
 
     console.log(
-        "Running a GraphQL API server at http://localhost:8000/graphql"
+        `Running a GraphQL API server at http://localhost:${PORT}/graphql`
     );
 }
 

@@ -15,7 +15,6 @@ export class User {
     email!: string;
 }
 
-
 @InputType()
 export class UserInput implements Pick<User, "email" | "name"> {
     @Field()
