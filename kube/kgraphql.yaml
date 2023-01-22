@@ -25,7 +25,8 @@ spec:
                 app: kgraphql
         spec:
             containers:
-            - name: app
-              image: learnk8s/knote-js:1.0.0
-              imagePullPolicy: IfNotPresent
-            restartPolicy: Always
+                - name: kgraphql
+                  image: eyssel/node-express-graphql
+                  ports:
+                      - containerPort: 3000
+                  imagePullPolicy: Always
