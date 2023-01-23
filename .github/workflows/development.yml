@@ -1,9 +1,9 @@
-name: prod
+name: dev
 
 on:
     push:
         branches:
-            - "main"
+            - "development"
 
 jobs:
     build:
@@ -24,4 +24,4 @@ jobs:
                   context: .
                   file: ./Dockerfile
                   push: true
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-express-graphql-prod
+                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-express-graphql-dev
