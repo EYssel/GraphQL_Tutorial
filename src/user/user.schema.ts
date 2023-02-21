@@ -1,5 +1,5 @@
-import { IsString } from "class-validator";
-import { Field, ID, InputType, ObjectType } from "type-graphql";
+import { IsString } from 'class-validator';
+import { Field, ID, InputType, ObjectType } from 'type-graphql';
 
 @ObjectType()
 export class User {
@@ -16,7 +16,7 @@ export class User {
 }
 
 @InputType()
-export class UserInput implements Pick<User, "email" | "name"> {
+export class UserInput implements Pick<User, 'email' | 'name'> {
     @Field()
     @IsString()
     name!: string;
