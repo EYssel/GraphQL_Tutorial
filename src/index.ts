@@ -1,8 +1,8 @@
-import express from "express";
-import { graphqlHTTP } from "express-graphql";
-import "reflect-metadata";
-import { buildSchema } from "type-graphql";
-import { UserResolvers } from "./user/user.resolvers";
+import express from 'express';
+import { graphqlHTTP } from 'express-graphql';
+import 'reflect-metadata';
+import { buildSchema } from 'type-graphql';
+import { UserResolvers } from './user/user.resolvers';
 
 async function main() {
     const schema = await buildSchema({
@@ -22,7 +22,7 @@ async function main() {
     const app = express();
 
     app.use(
-        "/graphql",
+        '/graphql',
         graphqlHTTP({
             schema: schema,
         })
@@ -32,9 +32,7 @@ async function main() {
 
     app.listen(PORT);
 
-    console.log(
-        `Running a GraphQL API server at http://localhost:${PORT}/graphql`
-    );
+    console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql`);
 
     console.log(`Test`);
 }
